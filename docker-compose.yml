@@ -10,18 +10,18 @@ services:
     depends_on:
       - postgres
       - redis
+    restart: always
 
   postgres:
-    image: postgres
+    image: postgres:15
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: shortlinks
+    restart: always
     volumes:
       - pgdata:/var/lib/postgresql/data
 
   redis:
-    image: redis
-
-volumes:
-  pgdata:
+    restart: always
+    image: redis:7

@@ -1,0 +1,10 @@
+name = "shortlink-worker"
+account_id = "0ece84d3f7ecb2f82dbcd2cb7fd099d3"
+workers_dev = false
+compatibility_date = "2024-08-01"
+
+main = "src/index.ts"
+
+routes = [
+  "https://www.lrb.dev.br/*"
+]

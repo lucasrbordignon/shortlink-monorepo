@@ -25,3 +25,6 @@ services:
   redis:
     restart: always
     image: redis:7
+    
+volumes:
+  pgdata:

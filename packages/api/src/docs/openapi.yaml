@@ -1,13 +1,20 @@
 openapi: 3.1.0
 info:
-  title: API de Shortlink
+  title: 🚀 API de Shortlink
   version: 1.0.0
-  description: API para encurtar URLs e redirecionar usando slugs
+  description: |
+    API para encurtar URLs, gerar slugs únicos e redirecionar para a URL original.  
+    Ideal para criar encurtadores personalizados e monitorar tráfego.
+
+tags:
+  - name: Shortlink
+    description: Endpoints para encurtar URLs e redirecionar usando slugs.
 
 paths:
   /shorten:
     post:
-      summary: Encurta uma URL
+      summary: Encurtar uma URL
+      description: Recebe uma URL válida e retorna um link encurtado.
       tags:
         - Shortlink
       requestBody:
@@ -16,6 +23,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ShortenRequest'
+            examples:
+              exemplo1:
+                summary: Encurtando uma URL simples
+                value:
+                  url: https://example.com/produto/123
       responses:
         '200':
           description: URL encurtada com sucesso
@@ -23,12 +35,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ShortenResponse'
+              examples:
+                sucesso:
+                  summary: Retorno do encurtador
+                  value:
+                    shortlink: https://meusite.com/abc123
         '400':
           description: Requisição inválida
+        '500':
+          description: Erro interno no servidor
 
   /{slug}:
     get:
-      summary: Redireciona para a URL original
+      summary: Redirecionar para a URL original
+      description: Retorna redirecionamento **302** para a URL encurtada.
       tags:
         - Shortlink
       parameters:
@@ -37,7 +57,7 @@ paths:
           required: true
           schema:
             type: string
-          description: Slug da URL encurtada
+          description: Slug da URL encurtada.
       responses:
         '302':
           description: Redirecionamento para a URL original
@@ -48,6 +68,8 @@ paths:
                 type: string
         '404':
           description: Slug não encontrado
+        '500':
+          description: Erro interno no servidor
 
 components:
   schemas:
@@ -66,4 +88,14 @@ components:
       properties:
         shortlink:
           type: string
-          example: http://localhost:3000/abc123
+          example: https://meusite.com/abc123
+
+x-theme:
+  sidebar: dark
+  colors:
+    primary: "#6d5eb6"
+    background: "#121212"
+    text: "#e0e0e0"
+    response:
+      success: "#4caf50"
+      error: "#f44336"

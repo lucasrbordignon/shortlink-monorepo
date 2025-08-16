@@ -5,12 +5,14 @@ jest.mock('../config/database', () => ({
     query: jest.fn(),
   },
 }));
+
 jest.mock('../config/redis', () => ({
   redis: {
     get: jest.fn(),
     set: jest.fn(),
   },
 }));
+
 jest.mock('../utils/generateSlug', () => ({
   generateSlug: () => 'testslug',
 }));
